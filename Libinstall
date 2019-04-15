@@ -1,0 +1,51 @@
+# please copy this script to your local root directory like /home/jjzhang/
+# then make this script excutable, do like this chmod +x Libinstall
+# run this script ./Libinstall and enjoy the automatic installed libraries necessary for Gadget2FDM
+# this script installs openmpi-3.0.1, gsl-2.4 and fftw-2.1.5 for you
+
+#!/bin/bash
+mkdir Downloads
+mkdir Library
+cd Downloads
+wget https://www.open-mpi.org/software/ompi/v3.0/downloads/openmpi-3.0.1.tar.gz
+wget ftp://ftp.gnu.org/gnu/gsl/gsl-2.4.tar.gz
+wget http://www.fftw.org/fftw-2.1.5.tar.gz
+tar -xvf openmpi-3.0.1.tar.gz
+tar -xvf gsl-2.4.tar.gz
+tar -xvf fftw-2.1.5.tar.gz
+cd openmpi-3.0.1
+./configure --prefix=/home/$USER/Library/openmpi-3.0.1
+make
+make install
+cd /home/$USER/Library
+ln -s openmpi-3.0.1 openmpi
+cd /home/$USER/
+sed -i '$a # This is adding openmpi path' .bashrc
+sed -i '$a export PATH=/home/$USER/Library/openmpi/bin:$PATH' .bashrc
+sed -i '$a export LD_LIBRARY_PATH=/home/$USER/Library/openmpi/lib:$LD_LIBRARY_PATH' .bashrc
+source .bashrc
+cd ./Downloads/gsl-2.4
+./configure --prefix=/home/$USER/Library/gsl-2.4
+make
+make install
+cd /home/$USER/Library
+ln -s gsl-2.4 gsl
+cd /home/$USER/
+sed -i '$a # This is adding gsl path' .bashrc
+sed -i '$a export PATH=$PATH:/home/$USER/Library/gsl/bin' .bashrc
+sed -i '$a export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/$USER/Library/gsl/lib' .bashrc
+source .bashrc
+cd ./Downloads/fftw-2.1.5
+./configure --prefix=/home/$USER/Library/fftw-2.1.5 --enable-mpi --enable-float --enable-type-prefix
+make
+make install
+make clean
+./configure --prefix=/home/$USER/Library/fftw-2.1.5 --enable-mpi --enable-type-prefix
+make
+make install
+cd /home/$USER/Library
+ln -s fftw-2.1.5 fftw
+cd /home/$USER/
+sed -i '$a # This is adding fftw path' .bashrc
+sed -i '$a export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/$USER/Library/fftw/lib' .bashrc
+source .bashrc
