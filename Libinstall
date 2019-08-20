@@ -1,24 +1,24 @@
 # please copy this script to your local root directory like /home/jjzhang/
 # then make this script excutable, do like this chmod +x Libinstall
 # run this script ./Libinstall and enjoy the automatic installed libraries necessary for Gadget2FDM
-# this script installs openmpi-3.0.1, gsl-2.4 and fftw-2.1.5 for you
+# this script installs openmpi-4.0.1, gsl-2.4 and fftw-2.1.5 for you
 
 #!/bin/bash
 mkdir Downloads
 mkdir Library
 cd Downloads
-wget https://www.open-mpi.org/software/ompi/v3.0/downloads/openmpi-3.0.1.tar.gz
+wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.1.tar.gz
 wget ftp://ftp.gnu.org/gnu/gsl/gsl-2.4.tar.gz
 wget http://www.fftw.org/fftw-2.1.5.tar.gz
-tar -xvf openmpi-3.0.1.tar.gz
+tar -xvf openmpi-4.0.1.tar.gz
 tar -xvf gsl-2.4.tar.gz
 tar -xvf fftw-2.1.5.tar.gz
-cd openmpi-3.0.1
-./configure --prefix=/home/$USER/Library/openmpi-3.0.1
+cd openmpi-4.0.1
+./configure --prefix=/home/$USER/Library/openmpi-4.0.1
 make
 make install
 cd /home/$USER/Library
-ln -s openmpi-3.0.1 openmpi
+ln -s openmpi-4.0.1 openmpi
 cd /home/$USER/
 sed -i '$a # This is adding openmpi path' .bashrc
 sed -i '$a export PATH=/home/$USER/Library/openmpi/bin:$PATH' .bashrc
