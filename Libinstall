@@ -8,10 +8,10 @@ mkdir Downloads
 mkdir Library
 cd Downloads
 wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.1.tar.gz
-wget ftp://ftp.gnu.org/gnu/gsl/gsl-2.4.tar.gz
+wget https://ftp.gnu.org/gnu/gsl/gsl-2.6.tar.gz
 wget http://www.fftw.org/fftw-2.1.5.tar.gz
 tar -xvf openmpi-4.0.1.tar.gz
-tar -xvf gsl-2.4.tar.gz
+tar -xvf gsl-2.6.tar.gz
 tar -xvf fftw-2.1.5.tar.gz
 cd openmpi-4.0.1
 ./configure --prefix=/home/$USER/Library/openmpi-4.0.1
@@ -24,12 +24,12 @@ sed -i '$a # This is adding openmpi path' .bashrc
 sed -i '$a export PATH=/home/$USER/Library/openmpi/bin:$PATH' .bashrc
 sed -i '$a export LD_LIBRARY_PATH=/home/$USER/Library/openmpi/lib:$LD_LIBRARY_PATH' .bashrc
 source .bashrc
-cd ./Downloads/gsl-2.4
-./configure --prefix=/home/$USER/Library/gsl-2.4
+cd ./Downloads/gsl-2.6
+./configure --prefix=/home/$USER/Library/gsl-2.6
 make
 make install
 cd /home/$USER/Library
-ln -s gsl-2.4 gsl
+ln -s gsl-2.6 gsl
 cd /home/$USER/
 sed -i '$a # This is adding gsl path' .bashrc
 sed -i '$a export PATH=$PATH:/home/$USER/Library/gsl/bin' .bashrc
